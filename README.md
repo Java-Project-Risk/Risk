@@ -1,3 +1,3 @@
 # Risk
 
-Salut.
+Salutation.
