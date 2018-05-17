@@ -1,15 +1,24 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Board {
 
+    static Scanner scan = new Scanner(System.in);
+
     protected ArrayList<Region> regions = new ArrayList<>();
+    protected ArrayList<Player> players = new ArrayList<>();
 
     public Board() {
         this.regionsInitialization();
         this.missionsInitialization();
     }
 
+    /**
+     * Initialise la carte :
+     *  - crétion de toutes les régions
+     *  - création de tous les territoires
+     */
     private void regionsInitialization() {
 
         // Création de toutes les régions
@@ -52,7 +61,7 @@ public class Board {
         Territory center_africa = new Territory("Afrique Centre", 1, africa);
         Territory east_africa = new Territory("Afrique Est", 2, africa);
         Territory north_africa = new Territory("Egypte / Libye", 3, africa);
-        Territory madagascar = new Territory("madagascar", 4, africa);
+        Territory madagascar = new Territory("Madagascar", 4, africa);
         Territory west_africa = new Territory("Afrique Ouest", 5, africa);
         Territory south_africa = new Territory("Afrique Sud", 6, africa);
 
@@ -202,7 +211,7 @@ public class Board {
         west_australia.setSeaConnections(new ArrayList<>(Arrays.asList(polynesia, new_zealand)));
 
         // On met les territoires dans des listes qui correspondent aux régions
-        ArrayList<Territory>  north_america_territories = new ArrayList<>(Arrays.asList(
+        ArrayList<Territory> north_america_territories = new ArrayList<>(Arrays.asList(
                 alaska, west_canada, mexico, east_usa, greenland, north_canada,
                 center_canada, east_canada, west_usa));
         /*
@@ -212,7 +221,7 @@ public class Board {
                 greenland, north_canada, center_canada, east_canada, west_usa));
          */
 
-        ArrayList<Territory>  south_america_territories = new ArrayList<>(Arrays.asList(
+        ArrayList<Territory> south_america_territories = new ArrayList<>(Arrays.asList(
                 argentina, brazil, west_latina, north_latina));
 
         ArrayList<Territory> europe_territories = new ArrayList<>(Arrays.asList(
@@ -252,6 +261,9 @@ public class Board {
          */
     }
 
+    /**
+     * Instanciation des missions
+     */
     private void missionsInitialization() {
 
         // Création de toutes les missions
@@ -264,6 +276,115 @@ public class Board {
         Mission mission_7 = new Mission("Contrôle 3", "Vous devez contrôler 21 territoires", 6, 6);
         Mission mission_8 = new Mission("Contrôle 4", "Vous devez contrôler la région la plus grosse et une autre région", 1, 6);
 
+    }
+
+    /**
+     * Instanciation des joueurs
+     *
+     * @param players_nb nombre de joueurs dans la partie
+     */
+    public void generatePlayers(int players_nb) {
+        int start_stock = this.startStock(players_nb);
+        for (int k = 0; k < players_nb; k++) {
+            System.out.print("Nom du joueur " + (k + 1) + " - NOSECU : ");
+            String name = scan.nextLine();
+            Player player = new Player(name, start_stock);
+            this.players.add(player);
+        }
+    }
+
+    /**
+     * Détermine le nombre d'unités pour chaque joueur au début de la partie
+     *
+     * @param players_nb nombre de joueurs dans la partie
+     * @return nombre d'unités pour chaque joueur
+     */
+    private int startStock(int players_nb) {
+        switch (players_nb) {
+            case 2:
+                return 40;
+            case 3:
+                return 35;
+            case 4:
+                return 30;
+            case 5:
+                return 25;
+            case 6:
+                return 20;
+            default:
+                return -1;
+        }
+    }
+
+    /**
+     * Affiche chaque joueur avec le nombre d'unités qu'il a en stock
+     */
+    public void showPlayers() {
+        System.out.println();
+        System.out.println("----- Liste des joueurs ----- ");
+        for (int k = 0; k < this.players.size(); k++) {
+            System.out.println("Joueur " + (k + 1) + " : " + this.players.get(k).getName() +
+                    " (stock : " + this.players.get(k).getUnitsStock() + ")");
+        }
+        System.out.println();
+    }
+
+    /**
+     * Répartit les territoires entre les joueurs au début de la partie
+     */
+    public void territoriesRepartition() {
+        ArrayList<Territory> territories = this.getTerritories();
+        int players_number = this.players.size();
+        int counter = 0;
+        while (territories.size() > 0)
+        {
+            // On "pioche" un territoire dans la liste puis on le supprime de la liste
+            int random_index = (int) (Math.random() * territories.size());
+            territories.get(random_index).setPlayer(this.players.get(counter % players_number));
+            territories.remove(random_index);
+            counter++;
+        }
+    }
+
+    /**
+     * Forme une liste de tous les territoires de la carte
+     *
+     * @return liste de tous les territoires
+     */
+    private ArrayList<Territory> getTerritories() {
+        ArrayList<Territory> territories = new ArrayList<>();
+
+        // On parcourt les régions
+        for (int i = 0; i < this.regions.size(); i++) {
+            ArrayList<Territory> region_territories = regions.get(i).getTerritories();
+
+            // Dans chaque région, on parcourt les territoires et on les met dans la liste
+            for (int j = 0; j < region_territories.size(); j++) {
+                territories.add(region_territories.get(j));
+                //System.out.println(region_territories.get(j).getName());
+            }
+        }
+        return territories;
+    }
+
+    /**
+     * Affiche l'état actuel de la carte, c'est-à-dire :
+     *  - le propriétaire de chaque territoire
+     *  - le nombre d'unités présentes sur chaque territoire
+     */
+    public void showMap() {
+        System.out.println("----- Etat actuel de la carte -----");
+        for (int k = 0; k < this.regions.size(); k++) {
+            this.regions.get(k).showRegion();
+        }
+    }
+
+    public ArrayList<Region> getRegions() {
+        return this.regions;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return this.players;
     }
 
 }

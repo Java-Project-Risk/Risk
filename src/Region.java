@@ -24,7 +24,7 @@ public class Region {
         return this.size;
     }
 
-    public ArrayList getTerritories() {
+    public ArrayList<Territory> getTerritories() {
         return this.territories;
     }
 
@@ -38,5 +38,16 @@ public class Region {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    /**
+     * Affiche le nom de la région ainsi que tous ses territoires
+     */
+    public void showRegion() {
+        System.out.println(this.name);
+        for (int k = 0; k < this.territories.size(); k++) {
+            System.out.print("    - ");
+            this.territories.get(k).showTerritory();
+        }
     }
 }
