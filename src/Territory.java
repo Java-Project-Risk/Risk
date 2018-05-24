@@ -84,4 +84,18 @@ public class Territory extends Region {
         System.out.print(this.name + " (" + this.player.getName() + ") - ");
         this.showUnits();
     }
+
+    public void addUnit(String unit_category) {
+        switch (unit_category) {
+            case "Soldat":
+                this.units.add(new Soldier());
+                break;
+            case "Cavalier":
+                this.units.add(new Horseman());
+                break;
+            case "Canon":
+                this.units.add(new Cannon());
+                break;
+        }
+    }
 }
