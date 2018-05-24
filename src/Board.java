@@ -6,8 +6,8 @@ public class Board {
 
     static Scanner scan = new Scanner(System.in);
 
-    protected ArrayList<Region> regions = new ArrayList<>();
-    protected ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Region> regions = new ArrayList<>();
+    private ArrayList<Player> players = new ArrayList<>();
 
     public Board() {
         this.regionsInitialization();

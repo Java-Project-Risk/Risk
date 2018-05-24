@@ -4,7 +4,7 @@ public class GameManager {
 
     static Scanner scan = new Scanner(System.in);
 
-    Board board;
+    private Board board;
 
     public GameManager() {
         this.board = new Board();
@@ -19,11 +19,23 @@ public class GameManager {
         this.board.generatePlayers(players_nb);
         this.board.showPlayers();
 
+        ArrayList<Region> regions = this.board.getRegions();
+        ArrayList<Player> players = this.board.getPlayers();
+
+        // TODO: Distribution des missions ici
+
         // Répartition des territoires entre les joueurs
         this.board.territoriesRepartition();
 
-        this.testConfig();
-        //board.showMap();
+        board.showMap();
+
+        // Placement des unités (l'un après l'autre, les joueurs placent toutes leurs unités)
+        for (int k = 0; k < players.size(); k++) {
+            players.get(k).repartUnits(regions);
+        }
+
+        //this.testConfig();
+
     }
 
     /**
@@ -53,6 +65,8 @@ public class GameManager {
 
         // On lance une attaque
         player1.launchAttack(ter1, ter2);
+
+
 
     }
 

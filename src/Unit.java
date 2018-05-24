@@ -62,6 +62,10 @@ public class Unit implements Comparable<Unit> {
         return power;
     }
 
+    public void setPower(int power) {
+        this.power = power;
+    }
+
     public void generatePower() {
         int k = power_max + 1 - power_min;
         int random_number = (int) (Math.random() * k);
