@@ -84,131 +84,131 @@ public class Board {
         Territory west_australia = new Territory("Australie Ouest", 4, oceania);
 
         // Ajout des listes des territoires voisins et des connexions maritimes aux territoires
-        alaska.setNeighbors(new ArrayList<>(Arrays.asList(west_canada, north_canada)));
-        alaska.setSeaConnections(new ArrayList<>(Arrays.asList(east_russia)));
+        alaska.setNeighbors(new ArrayList<>(Arrays.asList(west_canada, north_canada, east_russia)));
+        //alaska.setSeaConnections(new ArrayList<>(Arrays.asList(east_russia)));
 
         west_canada.setNeighbors(new ArrayList<>(Arrays.asList(alaska, north_canada, center_canada, west_usa)));
-        west_canada.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //west_canada.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
         mexico.setNeighbors(new ArrayList<>(Arrays.asList(east_usa, west_usa, north_latina)));
-        mexico.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //mexico.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
         east_usa.setNeighbors(new ArrayList<>(Arrays.asList(west_usa, mexico, center_canada, east_canada)));
-        east_usa.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //east_usa.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
-        greenland.setNeighbors(new ArrayList<>(Arrays.asList()));
-        greenland.setSeaConnections(new ArrayList<>(Arrays.asList(north_canada, center_canada, east_canada, iceland)));
+        greenland.setNeighbors(new ArrayList<>(Arrays.asList(north_canada, center_canada, east_canada, iceland)));
+        //greenland.setSeaConnections(new ArrayList<>(Arrays.asList(north_canada, center_canada, east_canada, iceland)));
 
-        north_canada.setNeighbors(new ArrayList<>(Arrays.asList(alaska, west_canada, center_canada, east_canada)));
-        north_canada.setSeaConnections(new ArrayList<>(Arrays.asList(greenland)));
+        north_canada.setNeighbors(new ArrayList<>(Arrays.asList(alaska, west_canada, center_canada, east_canada, greenland)));
+        //north_canada.setSeaConnections(new ArrayList<>(Arrays.asList(greenland)));
 
-        center_canada.setNeighbors(new ArrayList<>(Arrays.asList(west_canada, north_canada, east_canada, west_usa, east_usa)));
-        center_canada.setSeaConnections(new ArrayList<>(Arrays.asList(greenland)));
+        center_canada.setNeighbors(new ArrayList<>(Arrays.asList(west_canada, north_canada, east_canada, west_usa, east_usa, greenland)));
+        //center_canada.setSeaConnections(new ArrayList<>(Arrays.asList(greenland)));
 
-        east_canada.setNeighbors(new ArrayList<>(Arrays.asList(east_usa, center_canada)));
-        east_canada.setSeaConnections(new ArrayList<>(Arrays.asList(greenland)));
+        east_canada.setNeighbors(new ArrayList<>(Arrays.asList(east_usa, center_canada, greenland)));
+        //east_canada.setSeaConnections(new ArrayList<>(Arrays.asList(greenland)));
 
         west_usa.setNeighbors(new ArrayList<>(Arrays.asList(west_canada, center_canada, east_usa, mexico)));
-        west_usa.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //west_usa.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
         argentina.setNeighbors(new ArrayList<>(Arrays.asList(west_latina, brazil)));
-        argentina.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //argentina.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
-        brazil.setNeighbors(new ArrayList<>(Arrays.asList(argentina, west_latina, north_latina)));
-        brazil.setSeaConnections(new ArrayList<>(Arrays.asList(west_africa)));
+        brazil.setNeighbors(new ArrayList<>(Arrays.asList(argentina, west_latina, north_latina, west_africa)));
+        //brazil.setSeaConnections(new ArrayList<>(Arrays.asList(west_africa)));
 
         west_latina.setNeighbors(new ArrayList<>(Arrays.asList(argentina, brazil, north_latina)));
-        west_latina.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //west_latina.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
         north_latina.setNeighbors(new ArrayList<>(Arrays.asList(mexico, west_latina, brazil)));
-        north_latina.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //north_latina.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
-        great_britain.setNeighbors(new ArrayList<>(Arrays.asList()));
-        great_britain.setSeaConnections(new ArrayList<>(Arrays.asList(iceland, france_spain, germany, scandinavia)));
+        great_britain.setNeighbors(new ArrayList<>(Arrays.asList(iceland, france_spain, germany, scandinavia)));
+        //great_britain.setSeaConnections(new ArrayList<>(Arrays.asList(iceland, france_spain, germany, scandinavia)));
 
-        iceland.setNeighbors(new ArrayList<>(Arrays.asList()));
-        iceland.setSeaConnections(new ArrayList<>(Arrays.asList(greenland, great_britain, scandinavia)));
+        iceland.setNeighbors(new ArrayList<>(Arrays.asList(greenland, great_britain, scandinavia)));
+        //iceland.setSeaConnections(new ArrayList<>(Arrays.asList(greenland, great_britain, scandinavia)));
 
-        germany.setNeighbors(new ArrayList<>(Arrays.asList(france_spain, italy, east_europe)));
-        germany.setSeaConnections(new ArrayList<>(Arrays.asList(great_britain, scandinavia)));
+        germany.setNeighbors(new ArrayList<>(Arrays.asList(france_spain, italy, east_europe, great_britain, scandinavia)));
+        //germany.setSeaConnections(new ArrayList<>(Arrays.asList(great_britain, scandinavia)));
 
-        scandinavia.setNeighbors(new ArrayList<>(Arrays.asList(east_europe)));
-        scandinavia.setSeaConnections(new ArrayList<>(Arrays.asList(iceland, great_britain, germany)));
+        scandinavia.setNeighbors(new ArrayList<>(Arrays.asList(east_europe, iceland, great_britain, germany)));
+        //scandinavia.setSeaConnections(new ArrayList<>(Arrays.asList(iceland, great_britain, germany)));
 
-        italy.setNeighbors(new ArrayList<>(Arrays.asList(france_spain, germany, east_europe)));
-        italy.setSeaConnections(new ArrayList<>(Arrays.asList(north_africa)));
+        italy.setNeighbors(new ArrayList<>(Arrays.asList(france_spain, germany, east_europe, north_africa)));
+        //italy.setSeaConnections(new ArrayList<>(Arrays.asList(north_africa)));
 
         east_europe.setNeighbors(new ArrayList<>(Arrays.asList(scandinavia, germany, italy, middle_east, center_asia, west_russia)));
-        east_europe.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //east_europe.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
-        france_spain.setNeighbors(new ArrayList<>(Arrays.asList(germany, italy)));
-        france_spain.setSeaConnections(new ArrayList<>(Arrays.asList(great_britain, west_africa)));
+        france_spain.setNeighbors(new ArrayList<>(Arrays.asList(germany, italy, great_britain, west_africa)));
+        //france_spain.setSeaConnections(new ArrayList<>(Arrays.asList(great_britain, west_africa)));
 
         center_africa.setNeighbors(new ArrayList<>(Arrays.asList(west_africa, east_africa, south_africa)));
-        center_africa.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //center_africa.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
-        east_africa.setNeighbors(new ArrayList<>(Arrays.asList(north_africa, west_africa, center_africa, south_africa)));
-        east_africa.setSeaConnections(new ArrayList<>(Arrays.asList(middle_east, madagascar)));
+        east_africa.setNeighbors(new ArrayList<>(Arrays.asList(north_africa, west_africa, center_africa, south_africa, middle_east, madagascar)));
+        //east_africa.setSeaConnections(new ArrayList<>(Arrays.asList(middle_east, madagascar)));
 
-        north_africa.setNeighbors(new ArrayList<>(Arrays.asList(west_africa, east_africa, middle_east)));
-        north_africa.setSeaConnections(new ArrayList<>(Arrays.asList(italy)));
+        north_africa.setNeighbors(new ArrayList<>(Arrays.asList(west_africa, east_africa, middle_east, italy)));
+        //north_africa.setSeaConnections(new ArrayList<>(Arrays.asList(italy)));
 
-        madagascar.setNeighbors(new ArrayList<>(Arrays.asList()));
-        madagascar.setSeaConnections(new ArrayList<>(Arrays.asList(east_africa, south_africa)));
+        madagascar.setNeighbors(new ArrayList<>(Arrays.asList(east_africa, south_africa)));
+        //madagascar.setSeaConnections(new ArrayList<>(Arrays.asList(east_africa, south_africa)));
 
-        west_africa.setNeighbors(new ArrayList<>(Arrays.asList(north_africa, east_africa, center_africa)));
-        west_africa.setSeaConnections(new ArrayList<>(Arrays.asList(brazil, france_spain)));
+        west_africa.setNeighbors(new ArrayList<>(Arrays.asList(north_africa, east_africa, center_africa, brazil, france_spain)));
+        //west_africa.setSeaConnections(new ArrayList<>(Arrays.asList(brazil, france_spain)));
 
-        south_africa.setNeighbors(new ArrayList<>(Arrays.asList(center_africa, east_africa)));
-        south_africa.setSeaConnections(new ArrayList<>(Arrays.asList(madagascar)));
+        south_africa.setNeighbors(new ArrayList<>(Arrays.asList(center_africa, east_africa, madagascar)));
+        //south_africa.setSeaConnections(new ArrayList<>(Arrays.asList(madagascar)));
 
         center_asia.setNeighbors(new ArrayList<>(Arrays.asList(east_europe, west_russia, middle_east, india, china)));
-        center_asia.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //center_asia.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
         china.setNeighbors(new ArrayList<>(Arrays.asList(center_asia, india, thailand, mongolia, west_russia, center_russia)));
-        china.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //china.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
         india.setNeighbors(new ArrayList<>(Arrays.asList(middle_east, center_asia, china, thailand)));
-        india.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //india.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
         south_russia.setNeighbors(new ArrayList<>(Arrays.asList(center_russia, mongolia, north_russia, east_russia)));
-        south_russia.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //south_russia.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
-        japan.setNeighbors(new ArrayList<>(Arrays.asList()));
-        japan.setSeaConnections(new ArrayList<>(Arrays.asList(mongolia, east_russia)));
+        japan.setNeighbors(new ArrayList<>(Arrays.asList(mongolia, east_russia)));
+        //japan.setSeaConnections(new ArrayList<>(Arrays.asList(mongolia, east_russia)));
 
-        east_russia.setNeighbors(new ArrayList<>(Arrays.asList(north_russia, south_russia, mongolia)));
-        east_russia.setSeaConnections(new ArrayList<>(Arrays.asList(japan, alaska)));
+        east_russia.setNeighbors(new ArrayList<>(Arrays.asList(north_russia, south_russia, mongolia, japan, alaska)));
+        //east_russia.setSeaConnections(new ArrayList<>(Arrays.asList(japan, alaska)));
 
-        middle_east.setNeighbors(new ArrayList<>(Arrays.asList(north_africa, italy, east_europe, center_asia, india)));
-        middle_east.setSeaConnections(new ArrayList<>(Arrays.asList(east_africa)));
+        middle_east.setNeighbors(new ArrayList<>(Arrays.asList(north_africa, italy, east_europe, center_asia, india, east_africa)));
+        //middle_east.setSeaConnections(new ArrayList<>(Arrays.asList(east_africa)));
 
-        mongolia.setNeighbors(new ArrayList<>(Arrays.asList(center_russia, china, south_russia, east_russia)));
-        mongolia.setSeaConnections(new ArrayList<>(Arrays.asList(japan)));
+        mongolia.setNeighbors(new ArrayList<>(Arrays.asList(center_russia, china, south_russia, east_russia, japan)));
+        //mongolia.setSeaConnections(new ArrayList<>(Arrays.asList(japan)));
 
-        thailand.setNeighbors(new ArrayList<>(Arrays.asList(india, china)));
-        thailand.setSeaConnections(new ArrayList<>(Arrays.asList(polynesia)));
+        thailand.setNeighbors(new ArrayList<>(Arrays.asList(india, china, polynesia)));
+        //thailand.setSeaConnections(new ArrayList<>(Arrays.asList(polynesia)));
 
         center_russia.setNeighbors(new ArrayList<>(Arrays.asList(west_russia, china, north_russia, south_russia, mongolia)));
-        center_russia.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //center_russia.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
         west_russia.setNeighbors(new ArrayList<>(Arrays.asList(east_europe, center_asia, china, center_russia)));
-        west_russia.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //west_russia.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
         north_russia.setNeighbors(new ArrayList<>(Arrays.asList(center_russia, south_russia, east_russia)));
-        north_russia.setSeaConnections(new ArrayList<>(Arrays.asList()));
+        //north_russia.setSeaConnections(new ArrayList<>(Arrays.asList()));
 
-        east_australia.setNeighbors(new ArrayList<>(Arrays.asList(west_australia)));
-        east_australia.setSeaConnections(new ArrayList<>(Arrays.asList(new_zealand)));
+        east_australia.setNeighbors(new ArrayList<>(Arrays.asList(west_australia, new_zealand)));
+        //east_australia.setSeaConnections(new ArrayList<>(Arrays.asList(new_zealand)));
 
-        polynesia.setNeighbors(new ArrayList<>(Arrays.asList()));
-        polynesia.setSeaConnections(new ArrayList<>(Arrays.asList(thailand, west_australia, new_zealand)));
+        polynesia.setNeighbors(new ArrayList<>(Arrays.asList(thailand, west_australia, new_zealand)));
+        //polynesia.setSeaConnections(new ArrayList<>(Arrays.asList(thailand, west_australia, new_zealand)));
 
-        new_zealand.setNeighbors(new ArrayList<>(Arrays.asList()));
-        new_zealand.setSeaConnections(new ArrayList<>(Arrays.asList(polynesia, west_australia, east_australia)));
+        new_zealand.setNeighbors(new ArrayList<>(Arrays.asList(polynesia, west_australia, east_australia)));
+        //new_zealand.setSeaConnections(new ArrayList<>(Arrays.asList(polynesia, west_australia, east_australia)));
 
-        west_australia.setNeighbors(new ArrayList<>(Arrays.asList(east_australia)));
-        west_australia.setSeaConnections(new ArrayList<>(Arrays.asList(polynesia, new_zealand)));
+        west_australia.setNeighbors(new ArrayList<>(Arrays.asList(east_australia, polynesia, new_zealand)));
+        //west_australia.setSeaConnections(new ArrayList<>(Arrays.asList(polynesia, new_zealand)));
 
         // On met les territoires dans des listes qui correspondent aux régions
         ArrayList<Territory> north_america_territories = new ArrayList<>(Arrays.asList(
