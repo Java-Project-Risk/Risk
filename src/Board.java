@@ -8,6 +8,7 @@ public class Board {
 
     private ArrayList<Region> regions = new ArrayList<>();
     private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Mission> missions = new ArrayList<>();
 
     public Board() {
         this.regionsInitialization();
@@ -16,8 +17,8 @@ public class Board {
 
     /**
      * Initialise la carte :
-     *  - crétion de toutes les régions
-     *  - création de tous les territoires
+     * - crétion de toutes les régions
+     * - création de tous les territoires
      */
     private void regionsInitialization() {
 
@@ -267,15 +268,17 @@ public class Board {
     private void missionsInitialization() {
 
         // Création de toutes les missions
-        Mission mission_1 = new Mission("Destruction", "Vous devez détruire le joueur X", 3, 6);
+        Mission mission_1 = new Mission("Destruction", "Vous devez détruire un joueur ", 3, 6);
         Mission mission_2 = new Mission("Conquête", "Vous devez conquérir tous les territoires", 2, 3);
         Mission mission_3 = new Mission("Contrôle 1", "Vous devez contrôler 3 régions et au moins 18 territoires", 1, 6);
         Mission mission_4 = new Mission("Contrôle 2", "Vous devez contrôler 18 territoires avec au moins 2 unités", 3, 6);
-        Mission mission_5 = new Mission("Contrôle 3", "Vous devez contrôler 30 territoires", 2, 3);
-        Mission mission_6 = new Mission("Contrôle 3", "Vous devez contrôler 24 territoires", 4, 5);
-        Mission mission_7 = new Mission("Contrôle 3", "Vous devez contrôler 21 territoires", 6, 6);
+        Mission mission_5 = new Mission("Contrôle 31", "Vous devez contrôler 30 territoires", 2, 3);
+        Mission mission_6 = new Mission("Contrôle 32", "Vous devez contrôler 24 territoires", 4, 5);
+        Mission mission_7 = new Mission("Contrôle 33", "Vous devez contrôler 21 territoires", 6, 6);
         Mission mission_8 = new Mission("Contrôle 4", "Vous devez contrôler la région la plus grosse et une autre région", 1, 6);
 
+        this.missions.addAll(Arrays.asList(mission_1, mission_2, mission_3, mission_4, mission_5, mission_6, mission_7, mission_8));
+        this.setMissions(missions);
     }
 
     /**
@@ -336,8 +339,7 @@ public class Board {
         ArrayList<Territory> territories = this.getTerritories();
         int players_number = this.players.size();
         int counter = 0;
-        while (territories.size() > 0)
-        {
+        while (territories.size() > 0) {
             // On "pioche" un territoire dans la liste puis on le supprime de la liste
             int random_index = (int) (Math.random() * territories.size());
             territories.get(random_index).setPlayer(this.players.get(counter % players_number));
@@ -369,8 +371,8 @@ public class Board {
 
     /**
      * Affiche l'état actuel de la carte, c'est-à-dire :
-     *  - le propriétaire de chaque territoire
-     *  - le nombre d'unités présentes sur chaque territoire
+     * - le propriétaire de chaque territoire
+     * - le nombre d'unités présentes sur chaque territoire
      */
     public void showMap() {
         System.out.println("----- Etat actuel de la carte -----");
@@ -387,4 +389,62 @@ public class Board {
         return this.players;
     }
 
+    public void missionsRepartition() {
+        ArrayList<Mission> possibleMissions = new ArrayList<>();
+        int players_number = this.players.size();
+
+        for (int index = 0; index < this.missions.size(); index++) {
+            if (this.missions.get(index).getPlayersNbMin() <= players_number && this.missions.get(index).getPlayersNbMax() >= players_number) {
+                //System.out.println("mission ajoutée : " + this.missions.get(index).getName());
+                possibleMissions.add(this.missions.get(index));
+            }
+        }
+
+        this.setMissions(possibleMissions);
+        missionsRepartitionRandom();
+    }
+
+    public void missionsRepartitionRandom() {
+        //System.out.println(this.missions.size() + "/ " + this.players.size());
+        int counter = 0;
+        while (counter < this.players.size()) {
+            // On "pioche" une mission dans la liste puis on le supprime de la liste
+            int random_index = (int) (Math.random() * this.missions.size());
+            int random_player = (int) (Math.random() * this.players.size());
+            this.players.get(counter).setMission(this.missions.get(random_index));
+            //System.out.println("Joueur : " + this.getPlayers().get(counter).getName() + " // Mission : " + this.missions.get(random_index).getName());
+            if (!this.missions.get(random_index).getName().equals("Destruction")) {
+                this.missions.remove(random_index);
+            } else {
+                if (this.missions.size() > this.players.size()) {
+                    this.missions.remove(random_index);
+                }
+                //DestructMission destructMission = new DestructMission(mission_1, this.getPlayers().get(random_player));
+            }
+            counter++;
+        }
+
+    }
+
+
+    public void showMissionsRepartition() {
+        System.out.println("----- Etat actuel de la répartition des missions -----");
+        for (int k = 0; k < this.players.size(); k++) {
+            System.out.print("Joueur : " + this.players.get(k).getName());
+            if (this.players.get(k).getMission().getName().equals("Destruction")) {
+                this.players.get(k).getMission().showMission();
+            } else {
+                this.players.get(k).getMission().showMission();
+            }
+        }
+    }
+
+
+    public ArrayList<Mission> getMissions() {
+        return missions;
+    }
+
+    public void setMissions(ArrayList<Mission> missions) {
+        this.missions = missions;
+    }
 }

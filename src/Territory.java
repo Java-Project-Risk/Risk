@@ -8,7 +8,7 @@ public class Territory extends Region {
     protected Region region;
     protected Player player = null;
     protected ArrayList<Territory> neighbors = new ArrayList<>();
-    protected ArrayList<Territory> sea_connections = new ArrayList<>();
+    //protected ArrayList<Territory> sea_connections = new ArrayList<>();
     protected ArrayList<Unit> units = new ArrayList<>();
 
     public Territory(String name, int number, Region region) {
@@ -33,15 +33,15 @@ public class Territory extends Region {
         this.neighbors = neighbors;
     }
 
-    public ArrayList getSeaConnections() {
+    /*public ArrayList getSeaConnections() {
         return this.sea_connections;
     }
 
     public void setSeaConnections(ArrayList<Territory> sea_connections) {
         this.sea_connections = sea_connections;
     }
-
-    public Player getPlayer(){
+*/
+    public Player getPlayer() {
         return this.player;
     }
 
@@ -98,4 +98,6 @@ public class Territory extends Region {
                 break;
         }
     }
+
+
 }

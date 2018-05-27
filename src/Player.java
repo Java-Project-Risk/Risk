@@ -40,7 +40,7 @@ public class Player {
      * Demande au joueur combien d'unités de chaque catégorie il veut ajouter à chaque territoire en sa possession
      * Cette fonction sera utile au début de la partie lors du positionnement des unités
      * et au début de chaque tour, après la réception des renforts
-     *
+     * <p>
      * Pistes d'amélioration :
      * - là on passe la liste de tous les territoires en paramètres et on regarde à chaque fois si le territoire appartient
      * ou non au joueur avant de lui demander ce qu'il veut y mettre. Mais on pourrait peut-être mettre la liste des territoires
@@ -50,40 +50,108 @@ public class Player {
      *
      * @param regions Liste des régions (et donc des territoires)
      */
-    public void repartUnits(ArrayList<Region> regions) {
+    public void repartUnitsInitialisation(ArrayList<Region> regions) {
+        for (int i = 0; i < regions.size(); i++) {
+            Region region = regions.get(i);
+            for (int j = 0; j < region.getTerritories().size(); j++) {
+                Territory territory = region.getTerritories().get(j);
+                // Pour chaque territoire appartenant au joueur, on positionne 1 soldat
+                if (territory.getPlayer().getName().equals(this.name)) {
+                    territory.addUnit("Soldat");
+                    this.units_stock = this.units_stock - 1;
+                }
+            }
+        }
+        System.out.println();
+    }
+
+    public void repartUnitsfirsttour(ArrayList<Region> regions) {
+        System.out.println("Répartition " + this.name + " - NOSECU : ");
+        for (int i = 0; i < regions.size(); i++) {
+            while (this.units_stock > 0) {
+                Region region = regions.get(i);
+                System.out.println(region.getName());
+                for (int j = 0; j < region.getTerritories().size(); j++) {
+                    boolean circle = true;
+                    Territory territory = region.getTerritories().get(j);
+                    //while (circle) {
+                    // Pour chaque territoire appartenant au joueur, on lui demande combien de soldat il veut mettre
+                    if (territory.getPlayer().getName().equals(this.name) && this.units_stock > 0) {
+                        System.out.println("Points d'unité : " + this.units_stock);
+                        System.out.println("    - " + territory.getName() + " : ");
+                        System.out.print("        - Soldat(s) : ");
+                        int soldiers_nb = scan.nextInt();
+                        if (this.units_stock - soldiers_nb >= 0) {
+                            // Création des unités
+                            for (int k = 0; k < soldiers_nb; k++) {
+                                territory.addUnit("Soldat");
+                            }
+                            this.units_stock = this.units_stock - soldiers_nb;
+                            circle = false;
+                        } else {
+                            System.out.println("Pas assez de points");
+                        }
+                    }
+
+                    //}
+                }
+            }
+        }
+        System.out.println();
+    }
+
+
+    public void repartUnits(ArrayList<Region> regions) { // des choses à revoir
+        // pour les tours d'après, condition si on n'a plus de stock
+        // vérifier qu'on peut bien rajouter soldat cavalier et canon
+
+        int soldiers_nb = 0;
+        int horsemen_nb = 0;
+        int cannons_nb = 0;
 
         System.out.println("Répartition " + this.name + " - NOSECU : ");
         for (int i = 0; i < regions.size(); i++) {
-            Region region = regions.get(i);
-            System.out.println(region.getName());
-            for (int j = 0; j < region.getTerritories().size(); j++) {
-                Territory territory = region.getTerritories().get(j);
+            while (this.units_stock > 0) {
+                Region region = regions.get(i);
+                System.out.println(region.getName());
+                for (int j = 0; j < region.getTerritories().size(); j++) {
+                    Territory territory = region.getTerritories().get(j);
 
-                // Pour chaque territoire appartenant au joueur, on lui demande combien d'unités de chaque catégorie il veut mettre
-                if (territory.getPlayer().getName().equals(this.name)) {
-                    System.out.println("Points d'unité : " + this.units_stock);
-                    System.out.println("    - " + territory.getName() + " : ");
-                    System.out.print("        - Soldat(s) : ");
-                    int soldiers_nb = scan.nextInt();
-                    System.out.print("        - Cavalier(s) : ");
-                    int horsemen_nb = scan.nextInt();
-                    System.out.print("        - Canon(s) : ");
-                    int cannons_nb = scan.nextInt();
+                    // Pour chaque territoire appartenant au joueur, on lui demande combien d'unités de chaque catégorie il veut mettre
+                    if (territory.getPlayer().getName().equals(this.name) && this.units_stock > 0) {
+                        System.out.println("Points d'unité : " + this.units_stock);
+                        System.out.println("    - " + territory.getName() + " : ");
 
-                    // Création des unités
-                    for (int k = 0; k < soldiers_nb; k++) {
-                        territory.addUnit("Soldat");
-                    }
-                    for (int k = 0; k < horsemen_nb; k++) {
-                        territory.addUnit("Cavalier");
-                    }
-                    for (int k = 0; k < cannons_nb; k++) {
-                        territory.addUnit("Canon");
+                        System.out.print("        - Canon(s) : ");
+                        cannons_nb = scan.nextInt();
+                        if (this.units_stock - cannons_nb * 7 >= 0) {
+                            System.out.print("        - Cavalier(s) : ");
+                            horsemen_nb = scan.nextInt();
+                            if (this.units_stock - (cannons_nb * 7 + horsemen_nb * 3) >= 0) {
+                                System.out.print("        - Soldat(s) : ");
+                                soldiers_nb = scan.nextInt();
+                            } else {
+                                System.out.println("Pas assez de points");
+                            }
+                        } else {
+                            System.out.println("Pas assez de points");
+                        }
+
+                        // Création des unités
+                        for (int k = 0; k < soldiers_nb; k++) {
+                            territory.addUnit("Soldat");
+                        }
+                        for (int k = 0; k < horsemen_nb; k++) {
+                            territory.addUnit("Cavalier");
+                        }
+                        for (int k = 0; k < cannons_nb; k++) {
+                            territory.addUnit("Canon");
+                        }
+
+                        this.units_stock = this.units_stock - (soldiers_nb + horsemen_nb * 3 + cannons_nb * 7);
                     }
 
-                    this.units_stock = this.units_stock - (soldiers_nb + horsemen_nb * 3 + cannons_nb * 7);
                 }
-
             }
         }
         System.out.println();
@@ -266,4 +334,20 @@ public class Player {
         return best_unit;
     }
 
+    public int territoryPlayerCounter(ArrayList<Region> regions) {
+        int counter = 0;
+        for (int counterRegion = 0; counterRegion < regions.size(); counterRegion++) {
+            for (int counterTerritory = 0; counterTerritory < regions.get(counterRegion).getTerritories().size(); counterTerritory++) {
+                if (regions.get(counterRegion).getTerritories().get(counterTerritory).getPlayer().getName().equals(this.getName())) {
+                    counter++;
+                }
+            }
+        }
+        System.out.println("Le joueur " + this.getName() + " possède " + counter + " territoires sur toute la carte");
+        return counter;
+    }
+
+    public void setUnits_stock(int units_stock) {
+        this.units_stock = units_stock;
+    }
 }

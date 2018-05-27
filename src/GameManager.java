@@ -22,17 +22,37 @@ public class GameManager {
         ArrayList<Region> regions = this.board.getRegions();
         ArrayList<Player> players = this.board.getPlayers();
 
-        // TODO: Distribution des missions ici
-
         // Répartition des territoires entre les joueurs
         this.board.territoriesRepartition();
 
+        // Répartition des missions entre les joueurs
+        this.board.missionsRepartition();
+
+        // Affichage de la répartition des missions
+        this.board.showMissionsRepartition();
+
+        // Placement d'une unité sur chaque territoire puis du reste des soldats
+        for (int k = 0; k < players.size(); k++) {
+            players.get(k).repartUnitsInitialisation(regions);
+            players.get(k).repartUnitsfirsttour(regions);
+        }
+
+
         board.showMap();
 
-        // Placement des unités (l'un après l'autre, les joueurs placent toutes leurs unités)
-        for (int k = 0; k < players.size(); k++) {
-            players.get(k).repartUnits(regions);
+        //gestion des déplacements et attaques
+
+        // Donner des renforts aux joueurs
+        for (int playersCounter = 0; playersCounter < players_nb; playersCounter++) {
+            System.out.println("Renforts : " + this.givebackupPlayer(this.board.getPlayers().get(playersCounter)));
         }
+
+        for (int k = 0; k < players.size(); k++) {
+            players.get(k).repartUnits(regions); //TODO fonction encore à revoir
+        }
+
+        board.showMap();
+
 
         //this.testConfig();
 
@@ -67,7 +87,34 @@ public class GameManager {
         player1.launchAttack(ter1, ter2);
 
 
-
     }
+
+    public int givebackupPlayer(Player player) {
+        int backupUnits = 0;
+        // Comptage des territoires
+
+        backupUnits += player.territoryPlayerCounter(this.board.getRegions()) / 2; // à changer en fonction du tour du joueur
+
+        for (int regionCounter = 0; regionCounter < this.board.getRegions().size(); regionCounter++) {
+            int counter = 0;
+            for (int territoryCounter = 0; territoryCounter < this.board.getRegions().get(regionCounter).getTerritories().size(); territoryCounter++) {
+                if (this.board.getRegions().get(regionCounter).getTerritories().get(territoryCounter).getPlayer().getName().equals(player.getName())) {
+                    counter++;
+                }
+            }
+            if (counter == this.board.getRegions().get(regionCounter).getTerritories().size()) {
+                backupUnits += this.board.getRegions().get(regionCounter).getTerritories().size() / 2;
+            }
+        }
+
+        /// TODO: 26/05/2018  Il faut ajouter le cas des territoires capturés au dernier tour. Pour moi il faut créer une liste qui se remplit à chaque tour avec les territoires qu'on vient d'obtenir et on utilise cette liste pour calculer ce que l'on veut ici
+
+        if (backupUnits <= 2) {
+            backupUnits = 2;
+        }
+        player.setUnits_stock(backupUnits);
+        return backupUnits;
+    }
+
 
 }

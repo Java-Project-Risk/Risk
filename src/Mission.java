@@ -31,4 +31,13 @@ public class Mission {
     public int getPlayersNbMax() {
         return this.players_nb_max;
     }
+
+    public void showMission() {
+        System.out.println();
+        System.out.println("Nom de la mission : " + this.name);
+        System.out.println("Contenu mission : " +  this.content);
+        System.out.println("Nombre minimum de joueur : " +  this.players_nb_min);
+        System.out.println("Nombre maximum de joueur : " +  this.players_nb_max);
+        System.out.println();
+    }
 }
