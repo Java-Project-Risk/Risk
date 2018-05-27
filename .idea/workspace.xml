@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b5ead717-a86d-413a-8a05-d4107a5e7155" name="Default" comment="On enlève les SeaConnections">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DestructMission.java" />
+    <list default="true" id="b5ead717-a86d-413a-8a05-d4107a5e7155" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Risk/Board.class" afterPath="$PROJECT_DIR$/out/production/Risk/Board.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Risk/BotPlayer.class" afterPath="$PROJECT_DIR$/out/production/Risk/BotPlayer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Risk/Cannon.class" afterPath="$PROJECT_DIR$/out/production/Risk/Cannon.class" />
@@ -17,13 +16,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Risk/Territory.class" afterPath="$PROJECT_DIR$/out/production/Risk/Territory.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Risk/Unit.class" afterPath="$PROJECT_DIR$/out/production/Risk/Unit.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Board.java" afterPath="$PROJECT_DIR$/src/Board.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameManager.java" afterPath="$PROJECT_DIR$/src/GameManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Mission.java" afterPath="$PROJECT_DIR$/src/Mission.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Player.java" afterPath="$PROJECT_DIR$/src/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Region.java" afterPath="$PROJECT_DIR$/src/Region.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Territory.java" afterPath="$PROJECT_DIR$/src/Territory.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -491,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527240810326</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="On enlève les SeaConnections">
+      <created>1527418010943</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1527418010944</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -532,9 +531,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="On enlève les SeaConnections" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="On enlève les SeaConnections" />
+    <option name="LAST_COMMIT_MESSAGE" value="On enlève les SeaConnections" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -858,6 +857,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
