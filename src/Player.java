@@ -101,8 +101,7 @@ public class Player {
     }
 
 
-    public void repartUnits(ArrayList<Region> regions) { // des choses à revoir
-        // pour les tours d'après, condition si on n'a plus de stock
+    public void repartUnits(ArrayList<Region> regions) { /// TODO des choses à revoir pour cette fonction
         // vérifier qu'on peut bien rajouter soldat cavalier et canon
 
         int soldiers_nb = 0;
@@ -118,16 +117,17 @@ public class Player {
                     Territory territory = region.getTerritories().get(j);
 
                     // Pour chaque territoire appartenant au joueur, on lui demande combien d'unités de chaque catégorie il veut mettre
-                    if (territory.getPlayer().getName().equals(this.name) && this.units_stock > 0) {
+                    if (territory.getPlayer().getName().equals(this.name) && this.units_stock >= 0) {
                         System.out.println("Points d'unité : " + this.units_stock);
                         System.out.println("    - " + territory.getName() + " : ");
-
                         System.out.print("        - Canon(s) : ");
                         cannons_nb = scan.nextInt();
-                        if (this.units_stock - cannons_nb * 7 >= 0) {
+                        if ((this.units_stock - cannons_nb * 7) >= 0) {
+                            System.out.println("Points d'unité : " + (this.units_stock-cannons_nb*7));
                             System.out.print("        - Cavalier(s) : ");
                             horsemen_nb = scan.nextInt();
-                            if (this.units_stock - (cannons_nb * 7 + horsemen_nb * 3) >= 0) {
+                            if ((this.units_stock - (cannons_nb * 7 + horsemen_nb * 3)) >= 0) {
+                                System.out.println("Points d'unité : " + (this.units_stock-cannons_nb*7-horsemen_nb*3));
                                 System.out.print("        - Soldat(s) : ");
                                 soldiers_nb = scan.nextInt();
                             } else {
@@ -149,6 +149,8 @@ public class Player {
                         }
 
                         this.units_stock = this.units_stock - (soldiers_nb + horsemen_nb * 3 + cannons_nb * 7);
+                    } else{
+                        System.out.println("on est là");
                     }
 
                 }

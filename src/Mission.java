@@ -39,5 +39,8 @@ public class Mission {
         System.out.println("Nombre minimum de joueur : " +  this.players_nb_min);
         System.out.println("Nombre maximum de joueur : " +  this.players_nb_max);
         System.out.println();
+        if(this.name.equals("Destruction")){
+
+        }
     }
 }

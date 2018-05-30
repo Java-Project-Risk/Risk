@@ -42,9 +42,11 @@ public class GameManager {
 
         //gestion des déplacements et attaques
 
+
+
         // Donner des renforts aux joueurs
         for (int playersCounter = 0; playersCounter < players_nb; playersCounter++) {
-            System.out.println("Renforts : " + this.givebackupPlayer(this.board.getPlayers().get(playersCounter)));
+            this.giveBackupPlayer(this.board.getPlayers().get(playersCounter), 0);
         }
 
         for (int k = 0; k < players.size(); k++) {
@@ -89,11 +91,11 @@ public class GameManager {
 
     }
 
-    public int givebackupPlayer(Player player) {
+    public void giveBackupPlayer(Player player, int counterNewTerritory) {
         int backupUnits = 0;
         // Comptage des territoires
 
-        backupUnits += player.territoryPlayerCounter(this.board.getRegions()) / 2; // à changer en fonction du tour du joueur
+        backupUnits += player.territoryPlayerCounter(this.board.getRegions()) / 3; // à changer en fonction du tour du joueur
 
         for (int regionCounter = 0; regionCounter < this.board.getRegions().size(); regionCounter++) {
             int counter = 0;
@@ -106,14 +108,21 @@ public class GameManager {
                 backupUnits += this.board.getRegions().get(regionCounter).getTerritories().size() / 2;
             }
         }
-
-        /// TODO: 26/05/2018  Il faut ajouter le cas des territoires capturés au dernier tour. Pour moi il faut créer une liste qui se remplit à chaque tour avec les territoires qu'on vient d'obtenir et on utilise cette liste pour calculer ce que l'on veut ici
+        if (counterNewTerritory > 0) {
+            for (int i = 0; i < counterNewTerritory; i++) {
+                int random_number = (int) (Math.random()*2);
+                //System.out.println("le nombre aléatoire vaut : " + random_number);
+                if (random_number == 1) {
+                    backupUnits++;
+                }
+            }
+        }
 
         if (backupUnits <= 2) {
             backupUnits = 2;
         }
+        //System.out.println("Le nombre de renforts est :"+backupUnits);
         player.setUnits_stock(backupUnits);
-        return backupUnits;
     }
 
 

@@ -268,7 +268,7 @@ public class Board {
     private void missionsInitialization() {
 
         // Création de toutes les missions
-        Mission mission_1 = new Mission("Destruction", "Vous devez détruire un joueur ", 3, 6);
+        Mission mission_1 = new Mission("Destruction", "Vous devez détruire le joueur ", 3, 6);
         Mission mission_2 = new Mission("Conquête", "Vous devez conquérir tous les territoires", 2, 3);
         Mission mission_3 = new Mission("Contrôle 1", "Vous devez contrôler 3 régions et au moins 18 territoires", 1, 6);
         Mission mission_4 = new Mission("Contrôle 2", "Vous devez contrôler 18 territoires avec au moins 2 unités", 3, 6);
@@ -407,6 +407,7 @@ public class Board {
     public void missionsRepartitionRandom() {
         //System.out.println(this.missions.size() + "/ " + this.players.size());
         int counter = 0;
+        int numberMission = this.players.size();
         while (counter < this.players.size()) {
             // On "pioche" une mission dans la liste puis on le supprime de la liste
             int random_index = (int) (Math.random() * this.missions.size());
@@ -416,10 +417,19 @@ public class Board {
             if (!this.missions.get(random_index).getName().equals("Destruction")) {
                 this.missions.remove(random_index);
             } else {
+                System.out.println(random_player);
+                System.out.println(this.players.size());
+                if (random_player == counter && random_player >= this.players.size() - 2) {
+                    random_player--;
+                } else if (random_player == counter && random_player <= this.players.size() - 2) {
+                    random_player++;
+                }
+                DestructMission destructMission = new DestructMission(this.players.get(counter).getMission().getName(), this.players.get(counter).getMission().getContent(), this.players.get(counter).getMission().getPlayersNbMin(), this.players.get(counter).getMission().getPlayersNbMax(), this.getPlayers().get(random_player));
+                this.players.get(counter).setMission(destructMission);
                 if (this.missions.size() > this.players.size()) {
                     this.missions.remove(random_index);
                 }
-                //DestructMission destructMission = new DestructMission(mission_1, this.getPlayers().get(random_player));
+
             }
             counter++;
         }
@@ -431,11 +441,7 @@ public class Board {
         System.out.println("----- Etat actuel de la répartition des missions -----");
         for (int k = 0; k < this.players.size(); k++) {
             System.out.print("Joueur : " + this.players.get(k).getName());
-            if (this.players.get(k).getMission().getName().equals("Destruction")) {
-                this.players.get(k).getMission().showMission();
-            } else {
-                this.players.get(k).getMission().showMission();
-            }
+            this.players.get(k).getMission().showMission();
         }
     }
 
