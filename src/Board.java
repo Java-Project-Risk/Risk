@@ -417,9 +417,6 @@ public class Board {
             if (!this.missions.get(random_index).getName().equals("Destruction")) {
                 this.missions.remove(random_index);
             } else {
-                System.out.println(random_player);
-                System.out.println(this.players.size());
-                System.out.println(counter);
                 if (random_player == counter && random_player >= this.players.size() - 2) {
                     System.out.println("ici");
                     random_player--;
@@ -458,4 +455,53 @@ public class Board {
     public void setMissions(ArrayList<Mission> missions) {
         this.missions = missions;
     }
+
+    public void testAccomplishedMission(){
+        for (int k = 0; k < this.players.size(); k++) {
+            System.out.print("Joueur : " + this.players.get(k).getName());
+            switch (this.getPlayers().get(k).getMission().getName()) {
+                case "Destruction":
+                    break;
+
+                case "Conquête":
+                    if(this.getPlayers().get(k).territoryPlayerCounter(this.regions)==42){
+                        System.out.println("Vous avez gagnez en conquérant tous les territoires");
+                    }
+                    break;
+
+                case "Contrôle 1":
+                    if ((this.getPlayers().get(k).regionPlayerCounter(this.regions)==3)&&this.getPlayers().get(k).territoryPlayerCounter(this.regions)>=18){
+                        System.out.println("Vous avez gagnez en conquérant 3 régions et au moins 18 territoires");
+                    }
+                    break;
+                case "Contrôle 2":
+                    break;
+
+                case "Contrôle 31":
+                    if(this.getPlayers().get(k).territoryPlayerCounter(this.regions)==30){
+                        System.out.println("Vous avez gagnez en conquérant 30 territoires");
+                    }
+                    break;
+
+                case "Contrôle 32":
+                    if(this.getPlayers().get(k).territoryPlayerCounter(this.regions)==24){
+                        System.out.println("Vous avez gagnez en conquérant 24 territoires");
+                    }
+                    break;
+
+                case "Contrôle 33":
+                    if(this.getPlayers().get(k).territoryPlayerCounter(this.regions)==21){
+                        System.out.println("Vous avez gagnez en conquérant 21 territoires");
+                    }
+                    break;
+
+                case "Contrôle 4":
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
 }

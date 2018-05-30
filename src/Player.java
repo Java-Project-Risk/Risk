@@ -349,6 +349,22 @@ public class Player {
         return counter;
     }
 
+    public int regionPlayerCounter(ArrayList<Region> regions){
+        int regionPlayerCounter = 0;
+        for (int regionCounter = 0; regionCounter < regions.size(); regionCounter++) {
+            int counter = 0;
+            for (int territoryCounter = 0; territoryCounter < regions.get(regionCounter).getTerritories().size(); territoryCounter++) {
+                if (regions.get(regionCounter).getTerritories().get(territoryCounter).getPlayer().getName().equals(this.name)) {
+                    counter++;
+                }
+            }
+            if (counter == regions.get(regionCounter).getTerritories().size()) {
+                regionPlayerCounter++;
+            }
+        }
+        return regionPlayerCounter;
+    }
+
     public void setUnits_stock(int units_stock) {
         this.units_stock = units_stock;
     }
