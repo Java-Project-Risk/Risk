@@ -407,7 +407,7 @@ public class Board {
     public void missionsRepartitionRandom() {
         //System.out.println(this.missions.size() + "/ " + this.players.size());
         int counter = 0;
-        int numberMission = this.players.size();
+        int numberMission = 0;
         while (counter < this.players.size()) {
             // On "pioche" une mission dans la liste puis on le supprime de la liste
             int random_index = (int) (Math.random() * this.missions.size());
@@ -419,16 +419,21 @@ public class Board {
             } else {
                 System.out.println(random_player);
                 System.out.println(this.players.size());
+                System.out.println(counter);
                 if (random_player == counter && random_player >= this.players.size() - 2) {
+                    System.out.println("ici");
                     random_player--;
                 } else if (random_player == counter && random_player <= this.players.size() - 2) {
+                    System.out.println("là");
                     random_player++;
                 }
                 DestructMission destructMission = new DestructMission(this.players.get(counter).getMission().getName(), this.players.get(counter).getMission().getContent(), this.players.get(counter).getMission().getPlayersNbMin(), this.players.get(counter).getMission().getPlayersNbMax(), this.getPlayers().get(random_player));
                 this.players.get(counter).setMission(destructMission);
-                if (this.missions.size() > this.players.size()) {
+
+                if (this.missions.size() > this.players.size()-numberMission) {
                     this.missions.remove(random_index);
                 }
+                numberMission++;
 
             }
             counter++;
